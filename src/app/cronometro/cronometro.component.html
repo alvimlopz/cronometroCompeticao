@@ -1,0 +1,42 @@
+<div class="fullscreen-btn" (click)="fullscreen()">⤢</div>
+<div class="back-btn" *ngIf="estado === 'rodando' || estado === 'fim'" (click)="voltar()">←</div>
+
+<div class="container-cronometro" [ngClass]="estado">
+  <!-- LOGO E CABEÇALHO -->
+  <div class="logo-container">
+    <img src="/logonme.png" alt="Logo" class="logo-img" />
+  </div>
+
+  <!-- TELA INICIAL -->
+  <div *ngIf="estado === 'inicial'" class="start-screen">
+    <div class="input-group">
+      <span class="label">FOR</span>
+     <input
+  type="number"
+  class="input"
+  [(ngModel)]="inputMinutes"
+  placeholder="0"
+  (focus)="limparSeZero()"
+  (blur)="padronizarValor()"
+/>
+
+      <span class="label">MINUTES</span>
+    </div>
+    <button class="start-button" (click)="startCountdown()">START</button>
+  </div>
+
+  <!-- PRÉ-CONTAGEM -->
+  <div *ngIf="estado === 'contagem'" class="timer-countdown">
+    <h1>{{ displayTime }}</h1>
+  </div>
+
+  <!-- CRONÔMETRO RODANDO -->
+  <div *ngIf="estado === 'rodando'" class="timer-main">
+    <h1>{{ displayTime }}</h1>
+  </div>
+
+  <!-- FIM -->
+  <div *ngIf="estado === 'fim'" class="end-screen">
+    <h1>END</h1>
+  </div>
+</div>
